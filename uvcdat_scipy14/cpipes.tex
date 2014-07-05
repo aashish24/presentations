@@ -83,7 +83,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%                mycaption                     %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setcounter{figure}{1}
+\setcounter{figure}{0}
 \newcommand{\mycaption}[1]{
   \vspace{0.1cm}
   \begin{quote}
@@ -175,7 +175,7 @@ The main goal of this design is to facilitate collaboration among distributed us
 
 \begin{figure}[overview]
 \includegraphics[height=0.6\hsize]{images/Overview}
-\caption{Overview of the ClimatePipes architecture}
+\caption{Overview of the CDATWeb architecture}
 \end{figure}
 
 \vspace{1cm}
@@ -198,16 +198,8 @@ We chose Python as the binding language for the server-side analysis. Python was
 
 \begin{figure}[montage]
   \vspace{0.7cm}
-  \includegraphics[height=0.2\hsize]{images/PrecipiationFlux}
-  \hspace{0.3cm}
-  \includegraphics[height=0.2\hsize]{images/DataIntegrationImage}
-  \\
-  \vspace{0.7cm}
-  \includegraphics[height=0.2\hsize]{images/AirTemp}
-  \hspace{0.3cm}
-  \includegraphics[height=0.2\hsize]{images/IsolineImage}
-  \caption{Precipiation Flux (top left), ESGF search integration (top right), air temperature (bottom left), and isoline for total cloudiness (bottom right)}
-  \nobreak
+  \myfig[0]{images/vcs_plots}{0.80}
+  \caption{CDATWeb client interface showing comparison between model output and observation}
 \end{figure}
 
 
@@ -215,19 +207,14 @@ We chose Python as the binding language for the server-side analysis. Python was
 In this article, we presented some of our initial work in creating an open-source, web-based toolkit for the analysis and visualization of large climate datasets as part of the UV-CDAT project.  Although we did not describe the integration of CDATWeb with the diagnostics framework in this article, it has been successfully demonstrated and deployed on a working system. The preliminary results are encouraging, as they have proven the usability of the toolkit in terms of its ease of use and effectiveness in providing a sophisticated computing and visualization environment for climate scientists.  We are very thankful to the Department of Energy (DOE) and NASA for providing the support required for this effort.
 
 \begin{figure}[floodmap]
-\myfig[0]{images/Floodmap}{0.60}
-\caption{Flood map simulation using GeoJs}
+\myfig[1]{images/dv3d_plots}{0.80}
+\caption{Remotely rendered VCS and DV3D plot in CDATWeb}
 \end{figure}
-
-
 
 \end{pcol}
 \end{textblock}
 
 \large
-
-
-
 \end{pcol}
 \end{textblock}
 
@@ -238,10 +225,7 @@ In this article, we presented some of our initial work in creating an open-sourc
 \hspace{0.3cm}
 \includegraphics[height=0.04\hsize]{images/UV-CDAT_logo}
 \hspace{0.3cm}
-\includegraphics[height=0.04\hsize]{images/GEO_Logo}
-\hspace{0.3cm}
 \includegraphics[height=0.04\hsize]{images/esgf_1}
 \hspace{0.3cm}
-\includegraphics[height=0.04\hsize]{images/NYU_Logo}
 \end{textblock}
 \end{document}
