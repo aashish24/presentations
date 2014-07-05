@@ -1,0 +1,282 @@
+\documentclass[a0,landscape]{a0poster}
+
+%\usepackage{pstricks,pst-grad}
+\usepackage{multicol,ragged2e}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[amssymb,cdot]{SIunits}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{graphicx,amssymb}
+\usepackage{xcolor}
+\usepackage[justification=centering]{caption}
+
+%\textblockcolour{gray}
+
+
+% Discourage hyphenation - doesn't look as good in posters.
+\hyphenpenalty=5000
+\tolerance=1000
+
+% Definition of some variables and colors
+\setlength{\parindent}{0.0cm}
+\setlength{\parskip}{1.0cm}
+
+\newdimen\headerwidth
+\setlength{\headerwidth}{114.9cm}
+\newdimen\onecolwidth
+\setlength{\onecolwidth}{112.0cm}
+\newdimen\twocolwidth
+\setlength{\twocolwidth}{56.0cm}
+\newdimen\threecolwidth
+\setlength{\threecolwidth}{35cm}
+\newdimen\headerheight
+\setlength{\headerheight}{12cm}
+
+
+
+
+\newcommand{\dospace}{\vspace*{0.9cm}}
+
+\newenvironment{poster}{
+  \begin{center}
+  \begin{minipage}[c]{0.98\textwidth}
+}{
+  \end{minipage}
+  \end{center}
+}
+
+\newenvironment{pcolumn}[1]{
+  \begin{minipage}{#1\textwidth}
+  \begin{center}
+}{
+  \end{center}
+  \end{minipage}
+}
+
+\newenvironment{pcol}[1]{
+  \begin{minipage}[t]{#1}
+%  \begin{center}
+}{
+%  \end{center}
+  \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%               Background                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\background}[3]{
+  \newrgbcolor{cgradbegin}{#1}
+  \newrgbcolor{cgradend}{#2}
+  \psframe[fillstyle=gradient,gradend=cgradend,
+  gradbegin=cgradbegin,gradmidpoint=#3](-10,10)(1.1\textwidth,-1.1\textheight)
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                myfig                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\myfig}[3][0]{
+\begin{center}
+  \vspace{0.7cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+  \nobreak
+\end{center}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                mycaption                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{figure}{1}
+\newcommand{\mycaption}[1]{
+  \vspace{0.1cm}
+  \begin{quote}
+    {\small \textbf{Figure \arabic{figure}:} #1}
+  \end{quote}
+  \vspace{0.3cm}
+  \stepcounter{figure}
+}
+
+\newcommand{\pbox}[4]{
+%\psshadowbox[#3]{
+\begin{minipage}[t][#2][t]{#1}
+#4
+\end{minipage}
+}%}
+
+% Set up a grid with a border (first two arguments) and the number of intervals specified
+\TPGrid[25mm,0mm]{115}{80}
+
+\begin{document}
+
+\begin{textblock}{115}(0, 0)
+\begin{pcol}{\headerwidth}
+%\pbox{0.98\textwidth}{}{
+%% University logo
+\begin{minipage}[c][\headerheight][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\textwidth]{images/Kitware}
+  \end{center}
+\end{minipage}
+%%% Title
+\begin{minipage}[c][\headerheight][c]{0.755\textwidth}
+  \begin{center}
+    {\Huge \textbf{ClimatePipes: User-Friendly Data Access, Manipulation, Analysis and Visulization of Community Climate Models}}\\[10mm]
+    {\Large \underline{Aashish Chaudhary}, Chris Harris, David E. DeMarle, Guillaume Vialaneix, Berk Geveci, and Claudio Silvia}\\[6.5mm]
+    {\large Website: \texttt{http://climatepipes.kitware.com/}\hspace*{1.5cm} Email: \texttt{aashish.chaudhary@kitware.com}}\\[6.5mm]
+    {\large Scientific Computing, Kitware, Inc, 28 Corporate Drive, Clifton Park, NY 12065.}
+  \end{center}
+\end{minipage}
+%% ClimatePipes logo
+\begin{minipage}[c][\headerheight][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=1.5\textwidth]{images/ClimatePipes_Logo}
+  \end{center}
+\end{minipage}
+%}
+\end{pcol}
+\end{textblock}
+
+\dospace
+
+%% Left column
+
+%% INTRODUCTION
+\begin{textblock}{35}(0, 13)
+\begin{pcol}{\threecolwidth}
+
+ \begin{center}\textbf{\begin{Large}Motivation\end{Large}}\end{center}
+
+\large
+
+Observations unequivocally show that the global climate is changing, caused over the past 50 years primarily by human-induced emissions of heat-trapping gases. The dramatic
+effects of climate change include increases in water temperature, reduced frost days, a rise in sea level, and reduced snow cover. As the pace of climate change is expected to
+accelerate, the impact of these changes will resonate through a broad range of fields including public health, infrastructure, water resources, and many others.
+
+Long-term coordinated planning, funding, and action are required to reduce the impact on ecosystems, infrastructure, economies, and the global population. The wide variety of
+fields impacted by climate change means access to climate data and resources can no longer be restricted to scientists and researchers; other stakeholders must be involved.
+
+Unfortunately, widespread use of climate data in non-climate science communities is impeded by factors such as large data size, lack of adequate metadata, poor documentation,
+and lack of sufficient computational and visualization resources.
+\vspace{1cm}
+ \begin{center}\textbf{\begin{Large}Proposed Solution\end{Large}}\end{center}
+\large
+\begin{figure}[overview]
+\includegraphics[height=0.6\hsize]{images/Overview}
+\caption{Overview of the ClimatePipes architecture}
+\end{figure}
+
+ClimatePipes is cyberinfrastructure that provides state-of-the-art, user-friendly data access, analysis, and
+visualization for climate and related datasets. The ClimatePipes platform provides a single access point
+to numerous climate models and climate data sources, with all of the complexities related to data access
+managed by ClimatePipes in the background. This enables users to focus on solving their industry-related,
+real problems rather than using scarce resources to discover and access portions of this data. Even
+for those in the climate science community, ClimatePipes provides a centralized access point for sharing
+data and analyses.
+
+\end{pcol}
+\end{textblock}
+
+%% Central column
+
+\begin{textblock}{35}(38.9, 13)
+\begin{pcol}{\threecolwidth}
+
+\begin{center}\textbf{\begin{large}Web-based Geo-visualization Library\end{large}}\end{center}
+\large
+
+\begin{figure}[workflow]
+\includegraphics[height=0.2\hsize]{images/Workflow}
+\hspace{0.3cm}
+\includegraphics[height=0.2\hsize]{images/PercentCloudinessImage}
+\caption{Workflow for Archive application}
+\end{figure}
+
+To support the development of ClimatePipes applications, a web based geo-visualization library was created, GeoJs. GeoJs in turn is built on top of VGL, a generic WebGL-based visualization
+library. The use of WebGL allows large datasets to be visualized dynamically with modern browsers. GeoJs provides a map/layer base API to allow the user to quickly develop applications
+that layer geo-spacial data on a base map. GeoJS is an open-source,  JavaScript Geovisualization toolkit for visualizing 2D and 3D Climate and Geospatial datasets on the web. The motivation behind the
+development of GeoJS comes from the lack of open source web visualization tools that can combine Geographics Information Systems (GIS) with Geovisualization
+capabilities and support native Climate and Geospatial data formats such as NetCDF and Shapefile. GeoJS supports 1) Drawing map tiles from OpenStreeMap or any other
+tile server 2) Reading and rendering NetCDF, Shapefile, GeoJSON, and many other formats 3) Animating one or more layers 4) Presenting visual analytics in a
+Geospatial context along with many other features.
+
+\vspace{1cm}
+\begin{center}\textbf{\begin{large}Data Processing Engine\end{large}}\end{center}
+
+Like GeoJS, we have developed PyGeo for the ClimatePipes, which provide us the backend for data processing and web-services. Since Climate and Geospatial datasets
+exists in various formats, grid types, and resolutions, it is necessary to process the data before it can be visualized. PyGeo, provides a high level API
+to process the data using GDAL, VTK, Climate Data Analysis Toolkit (CDAT), OpenClimateGIS, and other open source toolkits.
+
+The Climate Data Analysis Tools (CDAT) framework is developed at LLNL for the analysis, visualization, and management of large-scale distributed climate data.
+
+The Visualization Toolkit (VTK) is an open-source, C++ toolkit for 2D and 3D graphics, volume rendering, image processing, visualization, and modeling. VTK processes
+data using a data flow graph (pipeline) in which each algorithm takes zero or more inputs and produces zero or more outputs.
+
+OpenClimateGIS (OCGIS) is a Python package designed for geospatial manipulation, subsetting, computation, and translation of climate datasets stored in local
+NetCDF files or files served through THREDDS data servers.
+
+%% Right column
+\begin{textblock}{35}(77.8, 13)
+\begin{pcol}{35cm}
+
+\begin{center}\textbf{\begin{large}Archive Application\end{large}}\end{center}
+
+The Archive application allows the user to search for climate data sets of interest based on keywords and temporal/spacial constraints. The application provides a familiar
+search interface similar to that of web search. The archive application datasets come from two sources: a local MongoDB that can be populated with datasets of interest and
+Earth System Grid Federation (ESGF). With users of the archive application have access to the entire set of ESGF datasets. If the user choses to
+explore a dataset on ESGF, it is download for local processing on the archive server. Datasets can be analyzed using work-flows that provide full provenance. Visualization of
+the result is done using GeoJs, a WebGL-based library.
+
+\begin{figure}[montage]
+  \vspace{0.7cm}
+  \includegraphics[height=0.2\hsize]{images/PrecipiationFlux}
+  \hspace{0.3cm}
+  \includegraphics[height=0.2\hsize]{images/DataIntegrationImage}
+  \\
+  \vspace{0.7cm}
+  \includegraphics[height=0.2\hsize]{images/AirTemp}
+  \hspace{0.3cm}
+  \includegraphics[height=0.2\hsize]{images/IsolineImage}
+  \caption{Precipiation Flux (top left), ESGF search integration (top right), air temperature (bottom left), and isoline for total cloudiness (bottom right)}
+  \nobreak
+\end{figure}
+
+
+
+
+\begin{center}\textbf{\begin{large}FloodMap Application\end{large}}\end{center}
+The FloodMap application enables users to dynamically visualize the possible effect of rising sea level on coastal areas around the world. The goal of the work is to make policy
+makers, business owners, teachers, and students understand the possible effects of climate change.
+
+The application builds on the elevation data from Shuttle Radar Topography Mission. It uses a 90 meter resolution dataset. In order to achieve a responsive experience, the data is
+aggregated to several levels of detail. As the user zooms in, the application displays higher resolution data. The application uses low resolution data when the user zooms out to maintain real-time performance.
+The flood level is calculated using a ‘naive’ selection of all points with an elevation that is less than the selected rise.
+\begin{figure}[floodmap]
+\myfig[0]{images/Floodmap}{0.60}
+\caption{Flood map simulation using GeoJs}
+\end{figure}
+
+
+
+\end{pcol}
+\end{textblock}
+
+\large
+
+
+
+\end{pcol}
+\end{textblock}
+
+\begin{textblock}{115}(0, 73)
+\includegraphics[height=0.04\hsize]{images/doe-logo}
+\hspace{0.3cm}
+\includegraphics[height=0.04\hsize]{images/VTK_logo}
+\hspace{0.3cm}
+\includegraphics[height=0.04\hsize]{images/UV-CDAT_logo}
+\hspace{0.3cm}
+\includegraphics[height=0.04\hsize]{images/GEO_Logo}
+\hspace{0.3cm}
+\includegraphics[height=0.04\hsize]{images/esgf_1}
+\hspace{0.3cm}
+\includegraphics[height=0.04\hsize]{images/NYU_Logo}
+\end{textblock}
+\end{document}
